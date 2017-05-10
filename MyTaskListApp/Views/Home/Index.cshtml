@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MyTaskListApp.Models.MyTask>
+
+    @{
+        ViewBag.Title = "My Task List";
+    }
+
+    <h2>My Task List</h2>
+
+    <table border="1">
+        <tr>
+            <th>Task</th>
+            <th>Category</th>
+            <th>Date</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <div>  @Html.Partial("Create", new MyTaskListApp.Models.MyTask())</div>
