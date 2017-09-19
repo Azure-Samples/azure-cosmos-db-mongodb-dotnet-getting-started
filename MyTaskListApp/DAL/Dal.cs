@@ -15,12 +15,10 @@ namespace MyTaskListApp
         //private MongoServer mongoServer = null;
         private bool disposed = false;
 
-        // To do: update the connection string with the DNS name
-        // or IP address of your server. 
-        //For example, "mongodb://testlinux.cloudapp.net
-        private string userName = "FILLME";
-        private string host = "FILLME";
-        private string password = "FILLME";
+        //Copy connection string from Azure portal
+        //Go to Quick Start pane, Choose .NET platform
+        //Copy the connection string provided there below
+        private string connectionString = @"FILLME";
 
         // This sample uses a database named "Tasks" and a 
         //collection named "TasksList".  The database and collection 
@@ -63,19 +61,10 @@ namespace MyTaskListApp
 
         private IMongoCollection<MyTask> GetTasksCollection()
         {
-            MongoClientSettings settings = new MongoClientSettings();
-            settings.Server = new MongoServerAddress(host, 10255);
-            settings.UseSsl = true;
-            settings.SslSettings = new SslSettings();
-            settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
-
-            MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
-            MongoIdentityEvidence evidence = new PasswordEvidence(password);
-
-            settings.Credentials = new List<MongoCredential>()
-            {
-                new MongoCredential("SCRAM-SHA-1", identity, evidence)
-            };
+            MongoClientSettings settings = MongoClientSettings.FromUrl(
+                new MongoUrl(this.connectionString));
+            settings.SslSettings =
+                new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
 
             MongoClient client = new MongoClient(settings);
             var database = client.GetDatabase(dbName);
@@ -85,19 +74,11 @@ namespace MyTaskListApp
 
         private IMongoCollection<MyTask> GetTasksCollectionForEdit()
         {
-            MongoClientSettings settings = new MongoClientSettings();
-            settings.Server = new MongoServerAddress(host, 10255);
-            settings.UseSsl = true;
-            settings.SslSettings = new SslSettings();
-            settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
+            MongoClientSettings settings = MongoClientSettings.FromUrl(
+                new MongoUrl(this.connectionString));
+            settings.SslSettings =
+                new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
 
-            MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
-            MongoIdentityEvidence evidence = new PasswordEvidence(password);
-
-            settings.Credentials = new List<MongoCredential>()
-            {
-                new MongoCredential("SCRAM-SHA-1", identity, evidence)
-            };
             MongoClient client = new MongoClient(settings);
             var database = client.GetDatabase(dbName);
             var todoTaskCollection = database.GetCollection<MyTask>(collectionName);
