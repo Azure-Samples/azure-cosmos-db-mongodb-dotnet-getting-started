@@ -203,8 +203,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Item\About.cshtml" />
-    <Content Include="Views\Item\Contact.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Item\Create.cshtml" />

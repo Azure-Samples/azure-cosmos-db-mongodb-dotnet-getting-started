@@ -41,11 +41,6 @@ namespace MyTaskListApp.Controllers
             }
         }
 
-        public ActionResult About()
-        {
-            return View();
-        }
-
         # region IDisposable
 
         new protected void Dispose()
