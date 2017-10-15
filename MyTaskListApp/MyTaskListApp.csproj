@@ -206,6 +206,7 @@
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Item\Create.cshtml" />
+    <Content Include="Views\Item\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

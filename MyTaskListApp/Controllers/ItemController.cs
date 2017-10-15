@@ -41,6 +41,13 @@ namespace MyTaskListApp.Controllers
             }
         }
 
+        public ActionResult View(Guid Id)
+        {
+            MyTask task = dal.GetTask(Id);
+            return View(task);
+        }
+
+
         # region IDisposable
 
         new protected void Dispose()

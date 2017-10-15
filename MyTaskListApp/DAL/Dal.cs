@@ -18,9 +18,9 @@ namespace MyTaskListApp
         // To do: update the connection string with the DNS name
         // or IP address of your server. 
         //For example, "mongodb://testlinux.cloudapp.net
-        private string userName = "FILLME";
-        private string host = "FILLME";
-        private string password = "FILLME";
+        private string userName = "pp-mongo-test";
+        private string host = "pp-mongo-test.documents.azure.com";
+        private string password = "AV52QlGiD5xfLP6TqNwik8rI3EvBbzCDW5y9QUahoY4JXmaSNaXEP6Jt9463AVDH3rcBaXvHttyh9ZXF8VkVpw==";
 
         // This sample uses a database named "Tasks" and a 
         //collection named "TasksList".  The database and collection 
@@ -59,6 +59,11 @@ namespace MyTaskListApp
             {
                 string msg = ex.Message;
             }
+        }
+
+        public MyTask GetTask(Guid id)
+        {
+            return GetTasksCollection().FindSync(t => t.Id == id).FirstOrDefault();
         }
 
         private IMongoCollection<MyTask> GetTasksCollection()
