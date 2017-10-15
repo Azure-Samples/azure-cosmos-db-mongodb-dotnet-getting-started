@@ -32,6 +32,7 @@ namespace MyTaskListApp.Controllers
         {
             try
             {
+                task.CreatedDate = DateTime.Now;
                 dal.CreateTask(task);
                 return RedirectToAction("Index");
             }
