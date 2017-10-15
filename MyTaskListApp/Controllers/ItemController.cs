@@ -47,6 +47,22 @@ namespace MyTaskListApp.Controllers
             return View(task);
         }
 
+        public ActionResult Edit(Guid Id)
+        {
+            MyTask task = dal.GetTask(Id);
+            return View(task);
+        }
+
+        [HttpPost]
+        public ActionResult Edit([Bind(Exclude = "CreatedDate")] MyTask task)
+        {
+            if (ModelState.IsValid)
+            {
+                dal.UpdateTask(task);
+                return RedirectToAction("Index");
+            }
+            return View(task);
+        }
 
         # region IDisposable
 

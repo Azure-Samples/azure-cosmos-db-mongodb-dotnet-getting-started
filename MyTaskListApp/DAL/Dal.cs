@@ -47,6 +47,15 @@ namespace MyTaskListApp
             }
         }
 
+
+
+        public void UpdateTask(MyTask task)
+        {
+            var collection = GetTasksCollectionForEdit();
+
+            collection.FindOneAndReplace(t => t.Id == task.Id, task);
+        }
+        
         // Creates a Task and inserts it into the collection in MongoDB.
         public void CreateTask(MyTask task)
         {
