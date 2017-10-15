@@ -53,6 +53,13 @@ namespace MyTaskListApp.Controllers
             return View(task);
         }
 
+        public ActionResult Delete(Guid Id)
+        {
+            dal.DeleteTask(Id);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult Edit([Bind(Exclude = "CreatedDate")] MyTask task)
         {

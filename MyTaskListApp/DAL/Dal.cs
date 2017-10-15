@@ -47,7 +47,12 @@ namespace MyTaskListApp
             }
         }
 
+        public void DeleteTask(Guid id)
+        {
+            var collection = GetTasksCollectionForEdit();
 
+            collection.FindOneAndDelete(t => t.Id == id);
+        }
 
         public void UpdateTask(MyTask task)
         {
