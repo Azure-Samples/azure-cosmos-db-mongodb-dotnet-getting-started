@@ -4,7 +4,7 @@ using MyTaskListApp.Models;
 
 namespace MyTaskListApp.Controllers
 {
-    public class HomeController : Controller, IDisposable
+    public class ItemController : Controller, IDisposable
     {
         private Dal dal = new Dal();
         private bool disposed = false;
