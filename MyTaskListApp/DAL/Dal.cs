@@ -72,10 +72,7 @@ namespace MyTaskListApp
             MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
             MongoIdentityEvidence evidence = new PasswordEvidence(password);
 
-            settings.Credentials = new List<MongoCredential>()
-            {
-                new MongoCredential("SCRAM-SHA-1", identity, evidence)
-            };
+            settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
 
             MongoClient client = new MongoClient(settings);
             var database = client.GetDatabase(dbName);
@@ -94,10 +91,8 @@ namespace MyTaskListApp
             MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
             MongoIdentityEvidence evidence = new PasswordEvidence(password);
 
-            settings.Credentials = new List<MongoCredential>()
-            {
-                new MongoCredential("SCRAM-SHA-1", identity, evidence)
-            };
+            settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
+            
             MongoClient client = new MongoClient(settings);
             var database = client.GetDatabase(dbName);
             var todoTaskCollection = database.GetCollection<MyTask>(collectionName);
