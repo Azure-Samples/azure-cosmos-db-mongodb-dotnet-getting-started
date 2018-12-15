@@ -28,6 +28,5 @@ The code included in this sample is intended to get you quickly started with a .
 ## More information
 
 - [Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction)
-- [Azure Cosmos DB for MongoDB API](https://docs.microsoft.com/azure/documentdb/documentdb-protocol-mongodb)
-- [MongoDB .NET driver](https://docs.mongodb.com/ecosystem/drivers/csharp/)
+- [Azure Cosmos DB for MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction)
 - [MongoDB .NET driver documentation](http://mongodb.github.io/mongo-csharp-driver/)
