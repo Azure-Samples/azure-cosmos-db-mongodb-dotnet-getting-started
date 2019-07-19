@@ -1,7 +1,11 @@
 ---
-services: cosmos-db
-platforms: dotnet
-author: sivethe
+languages:
+- go
+- csharp
+page_type: sample
+products:
+- azure
+- azure-cosmos-db
 ---
 
 # Developing a .NET app using Azure Cosmos DB for MongoDB API
