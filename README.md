@@ -1,11 +1,12 @@
 ---
 languages:
-- go
 - csharp
 page_type: sample
 products:
+- dotnet
 - azure
 - azure-cosmos-db
+description: "How to use the Azure Cosmos DB for MongoDB API to store and access data from a .NET application."
 ---
 
 # Developing a .NET app using Azure Cosmos DB for MongoDB API
