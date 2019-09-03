@@ -10,11 +10,8 @@ using System.Security.Authentication;
 
 namespace MyTaskListApp
 {
-    public class Dal : IDisposable
+    public class Dal
     {
-        //private MongoServer mongoServer = null;
-        private bool disposed = false;
-
         // To do: update the connection string with the DNS name
         // or IP address of your server. 
         //For example, "mongodb://testlinux.cloudapp.net
@@ -28,10 +25,6 @@ namespace MyTaskListApp
         private string dbName = "Tasks";
         private string collectionName = "TasksList";
 
-        // Default constructor.        
-        public Dal()
-        {
-        }
 
         // Gets all Task items from the MongoDB server.        
         public List<MyTask> GetAllTasks()
@@ -50,7 +43,7 @@ namespace MyTaskListApp
         // Creates a Task and inserts it into the collection in MongoDB.
         public void CreateTask(MyTask task)
         {
-            var collection = GetTasksCollectionForEdit();
+            var collection = GetTasksCollection();
             try
             {
                 collection.InsertOne(task);
@@ -80,45 +73,5 @@ namespace MyTaskListApp
             return todoTaskCollection;
         }
 
-        private IMongoCollection<MyTask> GetTasksCollectionForEdit()
-        {
-            MongoClientSettings settings = new MongoClientSettings();
-            settings.Server = new MongoServerAddress(host, 10255);
-            settings.UseSsl = true;
-            settings.SslSettings = new SslSettings();
-            settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
-
-            MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
-            MongoIdentityEvidence evidence = new PasswordEvidence(password);
-
-            settings.Credential = new MongoCredential("SCRAM-SHA-1", identity, evidence);
-            
-            MongoClient client = new MongoClient(settings);
-            var database = client.GetDatabase(dbName);
-            var todoTaskCollection = database.GetCollection<MyTask>(collectionName);
-            return todoTaskCollection;
-        }
-
-        # region IDisposable
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                }
-            }
-
-            this.disposed = true;
-        }
-
-        # endregion
     }
 }

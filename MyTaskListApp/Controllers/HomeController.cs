@@ -8,13 +8,12 @@ using System.Configuration;
 
 namespace MyTaskListApp.Controllers
 {
-    public class HomeController : Controller, IDisposable
+    public class HomeController : Controller
     {
         private Dal dal = new Dal();
-        private bool disposed = false;
+
         //
         // GET: /MyTask/
-
         public ActionResult Index()
         {
             return View(dal.GetAllTasks());
@@ -49,29 +48,5 @@ namespace MyTaskListApp.Controllers
         {
             return View();
         }
-
-        # region IDisposable
-
-        new protected void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        new protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    this.dal.Dispose();
-                }
-            }
-
-            this.disposed = true;
-        }
-
-        # endregion
-
     }
 }
