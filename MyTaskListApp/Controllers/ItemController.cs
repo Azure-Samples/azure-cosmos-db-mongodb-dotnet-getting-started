@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MyTaskListApp.Models;
-using System.Configuration;
 
 namespace MyTaskListApp.Controllers
 {
-    public class HomeController : Controller, IDisposable
+    public class ItemController : Controller, IDisposable
     {
         private Dal dal = new Dal();
         private bool disposed = false;
@@ -36,6 +32,7 @@ namespace MyTaskListApp.Controllers
         {
             try
             {
+                task.CreatedDate = DateTime.Now;
                 dal.CreateTask(task);
                 return RedirectToAction("Index");
             }
@@ -45,9 +42,34 @@ namespace MyTaskListApp.Controllers
             }
         }
 
-        public ActionResult About()
+        public ActionResult View(Guid Id)
         {
-            return View();
+            MyTask task = dal.GetTask(Id);
+            return View(task);
+        }
+
+        public ActionResult Edit(Guid Id)
+        {
+            MyTask task = dal.GetTask(Id);
+            return View(task);
+        }
+
+        public ActionResult Delete(Guid Id)
+        {
+            dal.DeleteTask(Id);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit([Bind(Exclude = "CreatedDate")] MyTask task)
+        {
+            if (ModelState.IsValid)
+            {
+                dal.UpdateTask(task);
+                return RedirectToAction("Index");
+            }
+            return View(task);
         }
 
         # region IDisposable

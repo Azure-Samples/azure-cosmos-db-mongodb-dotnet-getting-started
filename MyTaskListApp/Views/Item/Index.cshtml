@@ -6,12 +6,12 @@
 
     <h2>My Task List</h2>
 
-    <table border="1">
+    <table class="table">
         <tr>
             <th>Task</th>
             <th>Category</th>
             <th>Date</th>
-
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -26,9 +26,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
-
+                <td>
+                    @Html.ActionLink("View", "View", new {item.Id}) | @Html.ActionLink("Edit", "Edit", new {item.Id}) | @Html.ActionLink("Delete", "Delete", new {item.Id})
+                </td>
             </tr>
         }
 
     </table>
-    <div>  @Html.Partial("Create", new MyTaskListApp.Models.MyTask())</div>
+
+@Html.ActionLink("Create New Task", "Create")

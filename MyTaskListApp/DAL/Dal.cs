@@ -47,6 +47,20 @@ namespace MyTaskListApp
             }
         }
 
+        public void DeleteTask(Guid id)
+        {
+            var collection = GetTasksCollectionForEdit();
+
+            collection.FindOneAndDelete(t => t.Id == id);
+        }
+
+        public void UpdateTask(MyTask task)
+        {
+            var collection = GetTasksCollectionForEdit();
+
+            collection.FindOneAndReplace(t => t.Id == task.Id, task);
+        }
+        
         // Creates a Task and inserts it into the collection in MongoDB.
         public void CreateTask(MyTask task)
         {
@@ -59,6 +73,11 @@ namespace MyTaskListApp
             {
                 string msg = ex.Message;
             }
+        }
+
+        public MyTask GetTask(Guid id)
+        {
+            return GetTasksCollection().FindSync(t => t.Id == id).FirstOrDefault();
         }
 
         private IMongoCollection<MyTask> GetTasksCollection()
