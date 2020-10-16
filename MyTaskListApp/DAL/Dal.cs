@@ -68,6 +68,7 @@ namespace MyTaskListApp
             settings.UseSsl = true;
             settings.SslSettings = new SslSettings();
             settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
+            settings.RetryWrites = false;
 
             MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
             MongoIdentityEvidence evidence = new PasswordEvidence(password);
@@ -87,6 +88,7 @@ namespace MyTaskListApp
             settings.UseSsl = true;
             settings.SslSettings = new SslSettings();
             settings.SslSettings.EnabledSslProtocols = SslProtocols.Tls12;
+            settings.RetryWrites = false;
 
             MongoIdentity identity = new MongoInternalIdentity(dbName, userName);
             MongoIdentityEvidence evidence = new PasswordEvidence(password);
